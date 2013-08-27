@@ -18,7 +18,14 @@ chown -R postgres /etc/pgbouncer
 mkdir /var/lib/postgresql/wal_archive
 mkdir /var/lib/postgresql/9.3/replica1
 mkdir /var/lib/postgresql/9.3/replica2
-chown postgres /var/lib/postgresql/*
+mkdir /etc/postgresql/9.3/replica1
+mkdir /etc/postgresql/9.3/replica2
+cp /setup/postgres/postgresql.conf.replica1 /etc/postgresql/9.3/replica1/postgresql.conf
+cp /setup/postgres/pg_hba.conf /etc/postgresql/9.3/replica1/
+cp /setup/postgres/postgresql.conf.replica2 /etc/postgresql/9.3/replica2/postgresql.conf
+cp /setup/postgres/pg_hba.conf /etc/postgresql/9.3/replica2/
+chown -R postgres /var/lib/postgresql/*
+chown -R postgres /etc/postgresql/9.3/*
 chmod 700 /var/lib/postgresql/9.3/replica1
 chmod 700 /var/lib/postgresql/9.3/replica2
 

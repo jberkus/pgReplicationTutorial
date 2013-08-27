@@ -25,6 +25,7 @@ Software and Wetware:
 * terminal program capable of ssh
 * familiarity with the bash/linux command line
 * familiarity with one or more command-line text editors
+* vagrant and virtualbox (see below)
 
 Installing Vagrant and VirtualBox
 =================================
@@ -40,6 +41,10 @@ You will also need VirtualBox. The [Vagrant website has
 instructions on installing VirtualBox as
 well](http://docs.vagrantup.com/v2/virtualbox/index.html)
 
+Note that you need to have vagrant 1.2.5 or later, so you may
+need to upgrade even if you already had Vagrant installed.
+If you use an earlier version of vagrant, "vagrant up" will
+hang after it finishes provisioning.
 
 Installing Tutorial Exercises
 =============================
