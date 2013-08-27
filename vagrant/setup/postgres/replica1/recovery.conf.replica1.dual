@@ -29,13 +29,18 @@ standby_mode = on
 # connection string and receive XLOG records continuously.
 # Required for streaming replication
 
-primary_conninfo = 'host=localhost port=5432 user=postgres application_name=replica1'
+primary_conninfo = 'host=localhost port=5432 user=replicator application_name=replica1'
 
 # recovery_target_timeline
 # Set to 'latest' to follow the master if it switches timeline
 # requires version 9.3 or WAL file archiving to be effective
 
 recovery_target_timeline = 'latest'
+
+# create trigger file for failover
+# if this file exists, failover is initiated
+
+trigger_file = 'PROMOTE'
 
 #---------------------------------------------------
 # ARCHIVING Replication Parameters

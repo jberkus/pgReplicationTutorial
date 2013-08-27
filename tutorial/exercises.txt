@@ -1,0 +1,291 @@
+Exercises for PostgreSQL Replication Tutorial
+=============================================
+
+***Exercises to be updated before tutorial***
+***Please check email for updates***
+
+Start Vagrant and Tmux
+----------------------
+
+vagrant up
+vagrant ssh
+sudo su -
+tmux
+
+tmux
+----
+
+^b c
+su - postgres
+^b n
+^b n
+(you should be in "postgres" shell)
+
+optional: tab-completion exercise
+
+basic 2-node replication
+------------------------
+
+cd 9.3
+pg_basebackup --help | less
+pg_basebackup -x -P -D replica1
+cp /setup/postgres/replica1/* replica1/
+pg_ctl -D replica1 start
+ls -l | grep postgres
+psql -p 5432 libdata
+\dt
+\q
+psql -p 5433 libdata
+\dt
+\q
+createdb -p 5432 -U bench bench
+pgbench -i -s 10 -U bench bench
+psql -p 5432 bench
+\dt
+\q
+psql -p 5433 bench
+\dt
+delete from pgbench_history;
+\q
+
+Replication configuration
+-------------------------
+
+$EDITOR master/postgresql.conf
+$EDITOR replica1/postgresql.conf
+$EDITOR replica1/recovery.conf
+
+Administering replication
+-------------------------
+
+^b n
+(root shell)
+cd /setup/pgbench
+./runbench.sh
+^b n
+psql -p 5432
+\x
+select * from pg_stat_activity;
+select * from pg_stat_replication;
+select pg_xlog_location_diff(write_location,replay_location) from pg_stat_replication;
+\q
+psql -p 5433
+select pg_is_in_recovery();
+select pg_last_xlog_receive_location();
+select pg_last_xlog_receive_location(), pg_last_xlog_replay_location();
+select pg_xlog_location_diff(pg_last_xlog_receive_location(), pg_last_xlog_replay_location());
+select pg_last_xact_replay_timestamp();
+select now() - pg_last_xact_replay_timestamp();
+select pg_xlog_replay_pause();
+select pg_xlog_location_diff(pg_last_xlog_receive_location(), pg_last_xlog_replay_location());
+select now() - pg_last_xact_replay_timestamp();
+select pg_xlog_replay_resume();
+\c bench
+select count(*) from pgbench_history;
+(repeat above several times)
+\q
+
+Replication and Security
+------------------------
+
+psql -p 5432
+create role replicator password 'replicate' login replication;
+\du
+\q
+$EDITOR master/pg_hba.conf
+$EDITOR replica1/recovery.conf
+cp /setup/postgres/.pgpass ~/
+chmod 700 ~/.pgpass
+$EDITOR ~/.pgpass
+pg_ctl -D master reload
+pg_ctl -D replica1 restart
+ps -aux | grep replicator
+psql -p 5432
+select * from pg_stat_replication;
+\q
+
+Cloning and Archiving
+---------------------
+
+^b n
+^c
+#(pgbench killed)
+^b n
+pg_ctl -D replica1 stop
+rm -rf replica1/*
+$EDITOR master/postgresql.conf
+pg_ctl -D master restart
+^b n
+runbench.sh
+^b n
+psql -p 5432
+select pg_start_backup('replica1');
+select pg_is_in_backup();
+\q
+ls ~/wal_archive/
+rsync -av --exclude="pg_xlog/*" --exclude="postmaster.pid" master/* replica1/
+psql -p 5432
+select pg_stop_backup();
+\q
+cp /setup/postgres/replica1/* replica1/
+cp replica1/recovery.conf.replica1.archiving replica1/recovery.conf
+$EDITOR replica1/recovery.conf
+pg_ctl -D replica1 start
+psql -p 5432
+create table test(test text);
+select * from pg_stat_replication;
+\q
+tail -f /var/log/postgresql/postgresql-replica1
+psql -p 5433
+\dt
+\c bench
+select count(*) from pgbench_history;
+(repeat above several times)
+\q
+
+Dual Replication
+----------------
+
+$EDITOR master/postgresql.conf
+cp replica1/recovery.conf.replica1.dual replica1/recovery.conf
+^b n
+^c (kill pgbench)
+^b n
+pg_ctl -D master restart
+pg_ctl -D replica1 restart
+tail -f /var/log/postgresql/postgresql-replica1
+^c
+
+Failover and Failback
+---------------------
+
+^b n
+runbench.sh
+^b n
+pg_ctl -D master -m immediate stop
+pg_ctl -D replica1 promote
+ls replica1/
+psql -p 5433
+select pg_is_in_recovery();
+create table test2(test text);
+\q
+^b n
+runbench_replica1.sh
+^b n
+cp replica1/recovery.done master/recovery.conf
+$EDITOR master/recovery.conf
+pg_ctl -D master start
+psql -p 5433
+select * from pg_stat_replication;
+\q
+tail -f /var/log/postgresql/postgresql-master
+rm -rf master/*
+pg_basebackup -x -P -p 5433 -U replicator -D master
+cp replica1/recovery.done master/recovery.conf
+$EDITOR master/recovery.conf
+pg_ctl -D master start
+psql -p 5433
+tail -f /var/log/postgresql/postgresql-master
+select * from pg_stat_replication;
+touch master/PROMOTE
+(wait)
+psql -p 5432
+select pg_is_in_recovery();
+\q
+rm -rf replica1/*
+pg_basebackup -x -P -p 5432 -U replicator -D replica1
+cp /setup/postgres/replica1/* replica1/
+pg_ctl -D replica1 start
+psql -p 5432
+select * from pg_stat_replication;
+\q
+
+Synchronous Replication
+-----------------------
+
+$EDITOR master/postgresql.conf
+pg_ctl -D master reload
+^b n
+runbench.sh
+^b n
+psql -p 5432
+select * from pg_stat_replication;
+\timing
+begin;
+insert into test values ('test1');
+commit;
+begin;
+set synchronous_commit='local';
+insert into test values ('test2');
+commit;
+\q
+pg_ctl -D replica1 stop
+psql -p 5432
+begin;
+insert into test values ('test3');
+commit;
+^c
+begin;
+set synchronous_commit='local';
+insert into test values ('test4');
+commit;
+\q
+$EDITOR master/postgresql.conf
+pg_ctl -D master reload
+pg_ctl -D replica1 start
+
+Cascading Replication
+---------------------
+
+pg_basebackup -p 5433 -x -P -U replicator -D replica2
+cp /setup/postgres/replica2/* replica2/
+pg_ctl -D replica2 start
+psql -p 5432
+select * from pg_stat_replication;
+\q
+psql -p 5433
+select * from pg_stat_replication;
+\q
+psql -p 5434
+select * from pg_stat_replication;
+\q
+pg_ctl -D replica1 promote
+psql -p 5433
+select * from pg_stat_replication;
+\q
+
+pgbouncer LB/Failover
+---------------------
+^b n
+service pgbouncer start
+$EDITOR /etc/pgbouncer/pgbouncer.ini
+^b n
+psql -p 6432 bench
+show port;
+create table branches2 as select * from pgbench_branches;
+\q
+psql -p 6432 bench_ro
+show port;
+drop table branches2;
+\q
+pg_ctl -D replica1 -m immediate stop
+pg_ctl -D replica2 promote
+psql -p 6432 bench
+^b n
+$EDITOR /etc/pgbouncer/pgbouncer.ini
+service pgbouncer restart
+^b n
+psql -p 6432 bench
+show port;
+drop table branches2;
+\q
+
+
+
+
+
+
+
+
+
+

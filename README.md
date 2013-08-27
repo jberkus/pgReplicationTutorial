@@ -2,6 +2,7 @@ pgReplicationTutorial
 =====================
 
 This repository contains files for the PostgreSQL Binary Replication tutorial.
+
 These files are required to perform the hands-on exercises.
 Importantly, there is significant setup required in order to
 do the hands-on exercises which needs to happen _before_ the
@@ -112,6 +113,21 @@ Other Files In This Package
 ===========================
 
 The pgReplicationTutorial package also contains the following files in the Tutorial directory:
+
+exercises.txt
+-------------
+
+This is a set of commands which you will be running during the hands-on
+exercises for the tutorial.  These are provided in a text file so that
+you can copy & paste, instead of trying to read every letter and dash
+from the instructor's screen.
+
+pgReplicationTutorial.odt/pdf
+-----------------------------
+
+These are copies of the slides for the tutorial.
+
+The slides are still under development, and will be provided on the day of the tutorial.
 
 License
 =======
