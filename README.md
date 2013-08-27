@@ -1,7 +1,8 @@
 pgReplicationTutorial
 =====================
 
-This repository contains files for the PostgreSQL Binary Replication tutorial.
+This repository contains files for the PostgreSQL Binary
+Replication tutorial.
 
 These files are required to perform the hands-on exercises.
 Importantly, there is significant setup required in order to
@@ -54,7 +55,7 @@ Install the tutorial exercises on your machine one of two
 ways:
 
 **Preferred Method**: Git Checkout from the Github repo. The
-repository is here: https://github.com/pgexperts/accidentalDBA,
+repository is here: https://github.com/jberkus/pgReplicationTutorial,
 and you can clone it by:
 
     git clone https://github.com/jberkus/pgReplicationTutorial.git
@@ -71,8 +72,8 @@ This will require the programs "tar" and "gzip" to expand, as follows:
 We apologize for not providing a "zip" formatted archive, but zip does not
 preserve file permissions, which would cause issues.
 
-The accidentalDBA directory should be placed somewhere you have disk
-space available.
+The ReplicationTutorial directory should be placed somewhere
+you have disk space available.
 
 Vagrant Up
 ==========
@@ -81,8 +82,8 @@ The first time you do vagrant up, it will require an internet connection
 with significant bandwidth and around 1/2 hour.  As such, you should do
 it at home, before you get to the conference or the tutorial.
 
-Open your terminal program. Navigate to accidentalDBA/vagrant directory.
-Type the following:
+Open your terminal program. Navigate to pgReplicationTutorial/vagrant
+directory. Type the following:
 
     vagrant up
 
@@ -112,7 +113,8 @@ If it does not work on a 32-bit machine, please contact josh@pgexperts.com.
 Other Files In This Package
 ===========================
 
-The pgReplicationTutorial package also contains the following files in the Tutorial directory:
+The pgReplicationTutorial package also contains the following files
+in the Tutorial directory:
 
 exercises.txt
 -------------
@@ -127,12 +129,14 @@ pgReplicationTutorial.odt/pdf
 
 These are copies of the slides for the tutorial.
 
-The slides are still under development, and will be provided on the day of the tutorial.
+The slides are still under development, and will be provided on
+the day of the tutorial.
 
 License
 =======
 
-The pgReplicationTutorial is Copyright 2013 Josh Berkus and PostgreSQL Experts Inc.
+The pgReplicationTutorial is Copyright 2013 Josh Berkus
+and PostgreSQL Experts Inc.
 
 All slides, text, instructions and similar content in this tutorial are
 licensed [Creative Commons Attribution-ShareAlike 3.0]
