@@ -129,8 +129,16 @@ pgReplicationTutorial.odt/pdf
 
 These are copies of the slides for the tutorial.
 
-The slides are still under development, and will be provided on
-the day of the tutorial.
+interactives.txt
+----------------
+
+These are script "notes" for interactive exercises to be done with 
+participants on stage to demonstrate various replication concepts as
+metaphor.  Right now, these notes are not that understandable on their
+own.
+
+The interactions require a deck of playing cards, three ropes, 
+and two hats
 
 License
 =======
