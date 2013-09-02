@@ -160,6 +160,8 @@ Failover and Failback
 runbench.sh
 ^b n
 pg_ctl -D master -m immediate stop
+^b n
+^b n
 pg_ctl -D replica1 promote
 ls replica1/
 psql -p 5433
@@ -169,15 +171,9 @@ create table test2(test text);
 ^b n
 runbench_replica1.sh
 ^b n
-cp replica1/recovery.done master/recovery.conf
-$EDITOR master/recovery.conf
-pg_ctl -D master start
-psql -p 5433
-select * from pg_stat_replication;
-\q
-tail -f /var/log/postgresql/postgresql-master
 rm -rf master/*
 pg_basebackup -x -P -p 5433 -U replicator -D master
+cp /setup/postgres/master/* master/
 cp replica1/recovery.done master/recovery.conf
 $EDITOR master/recovery.conf
 pg_ctl -D master start
@@ -189,9 +185,11 @@ touch master/PROMOTE
 psql -p 5432
 select pg_is_in_recovery();
 \q
+pg_ctl -D replica1 -m immedate stop
 rm -rf replica1/*
 pg_basebackup -x -P -p 5432 -U replicator -D replica1
 cp /setup/postgres/replica1/* replica1/
+cp replica1/recovery.conf.replica1.dual replica1/recovery.conf
 pg_ctl -D replica1 start
 psql -p 5432
 select * from pg_stat_replication;
