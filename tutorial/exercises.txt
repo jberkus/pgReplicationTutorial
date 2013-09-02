@@ -1,9 +1,6 @@
 Exercises for PostgreSQL Replication Tutorial
 =============================================
 
-***Exercises to be updated before tutorial***
-***Please check email for updates***
-
 Start Vagrant and Tmux
 ----------------------
 
@@ -200,6 +197,27 @@ psql -p 5432
 select * from pg_stat_replication;
 \q
 
+Query Lag
+---------
+
+$EDITOR replica1/postgresql.conf
+psql -p 5433 libdata
+begin;
+set transaction_isolation = 'repeatable read';
+select * from copies;
+^b n
+psql -p 5432 libdata
+vacuum full copies;
+select * from pg_stat_replication;
+select pg_xlog_location_diff(write_location, replay_location) from pg_stat_replication;
+^b n
+select * from copies;
+wait 10 sec.
+select * from copies;
+\q
+^b n
+\q
+
 Synchronous Replication
 -----------------------
 
@@ -279,10 +297,6 @@ psql -p 6432 bench
 show port;
 drop table branches2;
 \q
-
-
-
-
 
 
 
