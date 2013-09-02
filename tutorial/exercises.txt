@@ -28,7 +28,7 @@ pg_basebackup --help | less
 pg_basebackup -x -P -D replica1
 cp /setup/postgres/replica1/* replica1/
 pg_ctl -D replica1 start
-ls -l | grep postgres
+ps -aux | grep postgres
 psql -p 5432 libdata
 \dt
 \q
