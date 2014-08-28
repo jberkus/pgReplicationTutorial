@@ -4,6 +4,9 @@ pgReplicationTutorial
 This repository contains files for the PostgreSQL Binary
 Replication tutorial.
 
+**NOT YET UPDATED FOR FOSS4G.  Attendees will be notified when
+the new version of the tutorial is available.**
+
 These files are required to perform the hands-on exercises.
 Importantly, there is significant setup required in order to
 do the hands-on exercises which needs to happen _before_ the
@@ -138,7 +141,7 @@ metaphor.  Right now, these notes are not that understandable on their
 own.
 
 The interactions require a deck of playing cards, three ropes, 
-and two hats
+and two hats.
 
 License
 =======
