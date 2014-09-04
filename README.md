@@ -31,7 +31,8 @@ Software and Wetware:
 * familiarity with one or more command-line text editors
 * vagrant and virtualbox (see below)
 
-== Installing the Base Software ==
+Installing the Base Software
+============================
 
 First, you will need to install Vagrant and VirtualBox if you do not
 already have them.  If you do already have them, please make sure that
@@ -54,7 +55,8 @@ VirtualBox Installation:
 * https://www.virtualbox.org/wiki/Downloads
 * https://www.virtualbox.org/wiki/End-user_documentation
 
-== Installing the Virtual Machine Image ==
+Installing the Virtual Machine Image
+====================================
 
 Once you've installed Vagrant and VirtualBox, you'll need to get an
 operating system image, or "box".  Please download one of the following
