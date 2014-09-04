@@ -30,5 +30,7 @@ su - postgres -c "/usr/bin/pg_ctl -D /var/lib/postgresql/9.3/master start"
 # load the libdata database
 psql -U postgres -f /setup/postgres/libdata.users.sql postgres
 pg_restore -e -U postgres -d libdata /setup/postgres/libdata.dump
+# load a postGIS database
+pg_restore -e -U postgres -O -x -d earth /setup/postgres/earth.dump
 
 exit 0

@@ -4,8 +4,7 @@ pgReplicationTutorial
 This repository contains files for the PostgreSQL Binary
 Replication tutorial.
 
-**NOT YET UPDATED FOR FOSS4G.  Attendees will be notified when
-the new version of the tutorial is available.**
+This tutorial has been updated with PostGIS for FOSS4G 2014
 
 These files are required to perform the hands-on exercises.
 Importantly, there is significant setup required in order to
@@ -32,24 +31,43 @@ Software and Wetware:
 * familiarity with one or more command-line text editors
 * vagrant and virtualbox (see below)
 
-Installing Vagrant and VirtualBox
-=================================
+== Installing the Base Software ==
 
-Go to http://www.vagrantup.com/
+First, you will need to install Vagrant and VirtualBox if you do not
+already have them.  If you do already have them, please make sure that
+you have at least these minimum versions:
 
-The Vagrant website has download packages, instructions
-on how to install and configure vagrant on various OSes, and
-a "getting started" guide.  Please install and configure
-vagrant _right away_; this will take around an hour.
+* Vagrant 1.4.1 or later
+* VirtualBox 4.2 or later
 
-You will also need VirtualBox. The [Vagrant website has
-instructions on installing VirtualBox as
-well](http://docs.vagrantup.com/v2/virtualbox/index.html)
+Otherwise, you're going to need to install them.  Fortunately, both have
+downloads for most OSes and extensive documentation.  And when you get
+used to them, you'll find Vagrant an invaluable tool for testing.
 
-Note that you need to have vagrant 1.2.5 or later, so you may
-need to upgrade even if you already had Vagrant installed.
-If you use an earlier version of vagrant, "vagrant up" will
-hang after it finishes provisioning.
+Vagrant Installation:
+
+* https://docs.vagrantup.com/v2/installation/
+* https://docs.vagrantup.com/v2/getting-started/
+
+VirtualBox Installation:
+
+* https://www.virtualbox.org/wiki/Downloads
+* https://www.virtualbox.org/wiki/End-user_documentation
+
+== Installing the Virtual Machine Image ==
+
+Once you've installed Vagrant and VirtualBox, you'll need to get an
+operating system image, or "box".  Please download one of the following
+large files:
+
+If you have a 64-bit laptop: http://files.vagrantup.com/precise64.box
+
+If you have a 32-bit laptop: http://files.vagrantup.com/precise32.box
+
+Then run the following command from the folder where you downloaded it:
+
+* 64-bit: vagrant box add precise precise64.box
+* 32-bit: vagrant box add precise precise32.box
 
 Installing Tutorial Exercises
 =============================
@@ -100,19 +118,6 @@ for the tutorial:
 
     vagrant suspend
 
-32-Bit Machines
-===============
-
-The exercises have not been tested on a 32-bit VM.  However, it's quite possible
-that they will work that way.  The way to switch to 32-bit is:
-
-1. open the file "VagrantFile" in a text editor
-2. change every instance of "precise64" to "precise32"
-3. save
-4. run "vagrant up"
-
-If it does not work on a 32-bit machine, please contact josh@pgexperts.com.
-
 Other Files In This Package
 ===========================
 
@@ -132,21 +137,17 @@ pgReplicationTutorial.odt/pdf
 
 These are copies of the slides for the tutorial.
 
-interactives.txt
-----------------
+ChangeLog
+=========
 
-These are script "notes" for interactive exercises to be done with 
-participants on stage to demonstrate various replication concepts as
-metaphor.  Right now, these notes are not that understandable on their
-own.
+**0.3** Version produced for FOSS4G 2014.  Includes information about replicating PostGIS.  Interactive "play" demonstrations have  have been removed due to their time-consuming nature.
 
-The interactions require a deck of playing cards, three ropes, 
-and two hats.
+**0.2** Initial version produced for DjangoCon 2013.
 
 License
 =======
 
-The pgReplicationTutorial is Copyright 2013 Josh Berkus
+The pgReplicationTutorial is Copyright 2013-2014 Josh Berkus
 and PostgreSQL Experts Inc.
 
 All slides, text, instructions and similar content in this tutorial are

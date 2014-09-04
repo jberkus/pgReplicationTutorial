@@ -10,3 +10,4 @@ ALTER ROLE postgres PASSWORD 'superuser';
 
 CREATE ROLE bench PASSWORD 'benchmark' LOGIN CREATEDB;
 
+CREATE DATABASE earth;
