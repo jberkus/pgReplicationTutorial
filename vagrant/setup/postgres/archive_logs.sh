@@ -3,7 +3,7 @@
 ARCHIVEDIR=/var/lib/postgresql/wal_archive
 WALFROM=$1
 WALDEST=$2
-NOARCHIVEFILE=/etc/postgresql/9.3/master/NOARCHIVING
+NOARCHIVEFILE=/etc/postgresql/9.4/master/NOARCHIVING
 
 # See whether we want all archiving off
 test -f ${NOARCHIVEFILE} && exit 0

@@ -110,8 +110,8 @@ directory. Type the following:
 
     vagrant up
 
-This will download the "precise64" box (VM), install a bunch of software on
-it, and start it up.  Verify that you can log into it with:
+This will launche the precise box (VM), install a bunch of software on
+it, and start it up.  You will see some brief errors during the startup, many of them in relation to not having a tty.  Only errors which involve more than 4 lines of errors in a row are significant; others can be ignored.  Verify that you can log into it with:
 
     vagrant ssh
 

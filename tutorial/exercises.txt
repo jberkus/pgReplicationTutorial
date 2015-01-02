@@ -12,17 +12,23 @@ Lines in (parentheses) are comments and shouldn't be pasted/typed in.
 
 The ^ carat symbol is short for the [Ctrl] key.  Thus ^c is "hold down [Ctrl], press [c]".
 
-Start Vagrant and Tmux
-----------------------
+If using Vagrant: Start Vagrant
+-------------------------------
 
 vagrant up
 vagrant ssh
 sudo su -
-tmux
+
+If using Docker: Start Docker and Postgres
+------------------------------------------
+
+docker run -it pgreplicationtutorial
+su - postgres -c "/usr/bin/pg_ctl -w -D /var/lib/postgresql/9.4/master start"
 
 tmux
 ----
 
+tmux
 ^b c
 su - postgres
 ^b n
@@ -34,17 +40,17 @@ optional: tab-completion exercise
 basic 2-node replication
 ------------------------
 
-cd 9.3
+cd 9.4
 ls
 pg_basebackup --help | less
 pg_basebackup -x -P -D replica1
 cp /setup/postgres/replica1/* replica1/
 pg_ctl -D replica1 start
 ps -aux | grep postgres
-psql -p 5432 earth
+psql -p 5432 libdata
 \dt
 \q
-psql -p 5433 earth
+psql -p 5433 libdata
 \dt
 \q
 createdb -p 5432 -U bench bench
