@@ -4,14 +4,12 @@ pgReplicationTutorial
 This repository contains files for the PostgreSQL Binary
 Replication tutorial.
 
-This tutorial has been updated with PostGIS for FOSS4G 2014
-
 These files are required to perform the hands-on exercises.
 Importantly, there is significant setup required in order to
 do the hands-on exercises which needs to happen _before_ the
 tutorial starts, so please read the below.
 
-**All steps through Vagrant Up should be completed before
+**All steps through Vagrant Up / Docker Pull should be completed before
 getting to the tutorial**
 
 Requirements
@@ -102,11 +100,11 @@ and you can clone it by:
 **Alternate Method**: if you're not comfortable with git, download
 the tarball from:
 
-    https://dl.dropboxusercontent.com/u/5132935/pgReplication.tgz
+    https://dl.dropboxusercontent.com/u/5132935/pgReplicationTutorial.tgz
 
 This will require the programs "tar" and "gzip" to expand, as follows:
 
-    tar -p -xvf pgReplication.tgz
+    tar -p -xvf pgReplicationTutorial.tgz
 
 We apologize for not providing a "zip" formatted archive, but zip does not
 preserve file permissions, which would cause issues.
@@ -127,7 +125,9 @@ directory. Type the following:
     vagrant up
 
 This will launche the precise box (VM), install a bunch of software on
-it, and start it up.  You will see some brief errors during the startup, many of them in relation to not having a tty.  Only errors which involve more than 4 lines of errors in a row are significant; others can be ignored.  Verify that you can log into it with:
+it, and start it up.  You will see some brief errors during the startup, many of them in relation to not having a tty. 
+Only errors which involve more than 4 lines of errors in a row are significant; others can be ignored. 
+Verify that you can log into it with:
 
     vagrant ssh
 
