@@ -29,10 +29,26 @@ Software and Wetware:
 * terminal program capable of ssh
 * familiarity with the bash/linux command line
 * familiarity with one or more command-line text editors
-* vagrant and virtualbox (see below)
+* vagrant and virtualbox (see below) OR Docker 1.4.0 or later
 
-Installing the Base Software
-============================
+Vagrant vs. Docker
+==================
+
+Docker is the recommended platform for running the execises, because it
+is much easier to set up, and requires far less system resources to run
+when you're taking the tutorial.  However, using Docker does require:
+
+* A Linux laptop, with Linux kernel 3.8 or later
+* Package lxc-docker installed running version 1.4 or later
+
+While Docker can be run on Windows and Mac desktops using boot2docker and other
+mechnisms, we recommend that such users use the Vagrant version instead.
+
+If you are using Docker, skip down to the Docker Installation below and
+proceed from there.
+
+Installing the Base Software: Vagrant
+=====================================
 
 First, you will need to install Vagrant and VirtualBox if you do not
 already have them.  If you do already have them, please make sure that
@@ -55,8 +71,8 @@ VirtualBox Installation:
 * https://www.virtualbox.org/wiki/Downloads
 * https://www.virtualbox.org/wiki/End-user_documentation
 
-Installing the Virtual Machine Image
-====================================
+Installing the Virtual Machine Image: Vagrant
+=============================================
 
 Once you've installed Vagrant and VirtualBox, you'll need to get an
 operating system image, or "box".  Please download one of the following
@@ -71,8 +87,8 @@ Then run the following command from the folder where you downloaded it:
 * 64-bit: vagrant box add precise precise64.box
 * 32-bit: vagrant box add precise precise32.box
 
-Installing Tutorial Exercises
-=============================
+Installing Tutorial Exercises: Vagrant
+======================================
 
 Install the tutorial exercises on your machine one of two
 ways:
@@ -119,6 +135,26 @@ Now log out with "exit".  Shut down the VM, but leave it set up in preparation
 for the tutorial:
 
     vagrant suspend
+    
+Docker Installation
+===================
+
+The Docker image for this tutorial is 64-bit and was built with Docker 1.4.1.
+If you are on a 32-bit machine, or if you are limited to using Docker 1.3 or older,
+I recommend that you scroll back up and follow the Vagrant install instructions
+instead.
+
+First pull the image:
+
+    docker pull jberkus/pgreplicationtutorial
+    
+While a pull is sufficient, I suggest that you test the image by doing:
+
+    docker run -it --rm jberkus/pgreplicationtutorial
+    
+This should log you into a command prompt as root.  If you type "exit" the container
+will halt and erase itself.
+    
 
 Other Files In This Package
 ===========================
@@ -142,6 +178,8 @@ These are copies of the slides for the tutorial.
 ChangeLog
 =========
 
+**0.4** Version produced for LinuxConf.AU 2015.  Removes PostGIS exercises.  Upgrades to PostgreSQL 9.4.  Adds Docker support.
+
 **0.3** Version produced for FOSS4G 2014.  Includes information about replicating PostGIS.  Interactive "play" demonstrations have  have been removed due to their time-consuming nature.
 
 **0.2** Initial version produced for DjangoCon 2013.
@@ -156,7 +194,8 @@ All slides, text, instructions and similar content in this tutorial are
 licensed [Creative Commons Attribution-ShareAlike 3.0]
 (http://creativecommons.org/licenses/by-sa/3.0/us/)
 
-Code exercises and sample databases are licensed under the
+Code exercises, virtual machines, containers and sample databases 
+are licensed under the
 [Gnu Public License Version 2]
 (http://www.gnu.org/licenses/gpl-2.0.html)
 
