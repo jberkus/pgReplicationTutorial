@@ -35,6 +35,8 @@ apt-get -y -q install pgbouncer
 
 # install alternate editor and tmux and other utilities
 apt-get -y -q install joe
+apt-get -y -q install nano
+apt-get -y -q install vi 
 apt-get -y -q install tmux
 
 echo ''

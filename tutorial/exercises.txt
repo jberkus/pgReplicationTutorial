@@ -338,6 +338,39 @@ show port;
 drop table branches2;
 \q
 
+replication slots
+-----------------
+
+pg_ctl -D replica2 -m fast stop
+pg_ctl -D master start
+rm -rf replica1/*
+pg_basebackup -x -P -D replica1
+cp /setup/postgres/replica1/* replica1/
+mv replica1/recovery.conf.replica1.slot replica1/recovery.conf
+psql -p 5432 
+SELECT * FROM pg_create_physical_replication_slot('replica1');
+\q
+less replica1/recovery.conf
+pg_ctl -D replica1 start
+^b n
+cd /setup/postgres/pgbench
+./runbench.sh
+^b n
+psql -p 5432
+select * from pg_replication_slots;
+\q
+pg_ctl -D replica1 stop
+psql -p 5432
+select * from pg_replication_slots;
+# repeat above 3 times
+\q
+pg_ctl -D replica1 start
+psql -p 5432
+select * from pg_replication_slots;
+# repeat above 3 times
+\q
+
+
 Exit
 ----
 
