@@ -69,22 +69,6 @@ VirtualBox Installation:
 * https://www.virtualbox.org/wiki/Downloads
 * https://www.virtualbox.org/wiki/End-user_documentation
 
-Installing the Virtual Machine Image: Vagrant
-=============================================
-
-Once you've installed Vagrant and VirtualBox, you'll need to get an
-operating system image, or "box".  Please download one of the following
-large files:
-
-If you have a 64-bit laptop: http://files.vagrantup.com/precise64.box
-
-If you have a 32-bit laptop: http://files.vagrantup.com/precise32.box
-
-Then run the following command from the folder where you downloaded it:
-
-* 64-bit: vagrant box add precise precise64.box
-* 32-bit: vagrant box add precise precise32.box
-
 Installing Tutorial Exercises: Vagrant
 ======================================
 
