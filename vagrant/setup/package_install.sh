@@ -29,6 +29,7 @@ apt-get -y -q install postgresql-9.4
 apt-get -y -q install postgresql-contrib-9.4
 apt-get -y -q install postgresql-plpython-9.4
 apt-get -y -q install pgbouncer
+apt-get -y -q install rsync
 
 # install PostGIS
 #apt-get -y -q install postgresql-9.4-postgis-2.1
