@@ -178,6 +178,8 @@ These are copies of the slides for the tutorial.
 ChangeLog
 =========
 
+**0.5.1** multiple fixes to Docker image.
+
 **0.5** Added PostgreSQL 9.4 replication slots to the tutorial as exercise.  Added some additional tuning and configuration portions.
 
 **0.4** Version produced for LinuxConf.AU 2015.  Removes PostGIS exercises.  Upgrades to PostgreSQL 9.4.  Adds Docker support.

@@ -29,7 +29,7 @@ apt-get -y -q install tmux
 
 echo ''
 echo 'vagrant loaded and ready for tutorial'
-echo 'version 0.4 of pgReplicationTutorial environment'
+echo 'version 0.5.1 of pgReplicationTutorial environment'
 echo 'now with PostgreSQL 9.4'
 
 exit 0

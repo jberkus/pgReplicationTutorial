@@ -38,10 +38,11 @@ apt-get -y -q install joe
 apt-get -y -q install nano
 apt-get -y -q install vim
 apt-get -y -q install tmux
+apt-get -y -q install rsync
 
 echo ''
 echo 'container loaded and ready for tutorial'
-echo 'version 0.4 of pgReplicationTutorial environment'
+echo 'version 0.5.1 of pgReplicationTutorial environment'
 echo 'now with 9.4 and docker support'
 
 exit 0
