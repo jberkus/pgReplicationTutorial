@@ -363,11 +363,14 @@ pg_ctl -D replica1 stop
 psql -p 5432
 select * from pg_replication_slots;
 # repeat above 3 times
+select pg_xlog_location_diff(pg_current_xlog_location(), restart_lsn) from pg_replication_slots;
 \q
 pg_ctl -D replica1 start
 psql -p 5432
 select * from pg_replication_slots;
 # repeat above 3 times
+select pg_xlog_location_diff(pg_current_xlog_location(), restart_lsn) from pg_replication_slots;
+
 \q
 
 

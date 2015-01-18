@@ -34,7 +34,7 @@ primary_conninfo = 'host=localhost port=5432 user=replicator application_name=re
 # replication slot
 # set to the slot on the master for this replica.  this slot must already exist
 
-primary_slotname = 'replica1'
+primary_slot_name = 'replica1'
 
 # recovery_target_timeline
 # Set to 'latest' to follow the master if it switches timeline
