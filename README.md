@@ -57,7 +57,7 @@ Installing Tutorial Exercises
 =============================
 
 Install the tutorial exercises on your machine one of two
-ways below.  Installing them is required if you are using 
+ways below.  Installing them is **required** if you are using 
 Vagrant, and is optional if you are using Docker, but helpful.
 
 **Preferred Method**: Git Checkout from the Github repo. The
@@ -75,8 +75,11 @@ This will require the programs "tar" and "gzip" to expand, as follows:
 
     tar -p -xvf pgReplicationTutorial.tgz
 
-We apologize for not providing a "zip" formatted archive, but zip does not
-preserve file permissions, which would cause issues.
+There is also a "zip" formatted archive which should be more friendly for
+Windows users.  However, this zip file **will not work for Vagrant execution**, 
+so it is only suitable for Docker users.  You can obtain this zip file from github:
+
+    https://github.com/jberkus/pgReplicationTutorial/archive/master.zip
 
 The ReplicationTutorial directory should be placed somewhere
 you have disk space available.
