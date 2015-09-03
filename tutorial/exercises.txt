@@ -22,7 +22,7 @@ sudo su -
 If using Docker: Start Docker and Postgres
 ------------------------------------------
 
-docker run -it pgreplicationtutorial
+docker run -it jberkus/pgreplicationtutorial
 su - postgres -c "/usr/bin/pg_ctl -w -D /var/lib/postgresql/9.4/master start"
 
 tmux
@@ -140,7 +140,7 @@ $EDITOR master/postgresql.conf
 pg_ctl -D master restart
 ps aux | grep archiver
 ^b n
-runbench.sh
+./runbench.sh
 ^b n
 psql -p 5432
 select pg_start_backup('replica1');
@@ -203,7 +203,7 @@ create table test2(test text);
 ./runbench_replica1.sh
 ^b n
 rm -rf master/*
-pg_basebackup -x -P -p 5433 -U replicator -D master
+pg_basebackup -X stream -P -p 5433 -U replicator -D master
 cp /setup/postgres/master/* master/
 cp replica1/recovery.done master/recovery.conf
 $EDITOR master/recovery.conf
@@ -235,7 +235,6 @@ psql -p 5433 libdata
 begin;
 set transaction_isolation = 'repeatable read';
 select * from copies;
-q
 ^b n
 psql -U postgres -p 5432 libdata
 vacuum full copies;
@@ -255,8 +254,11 @@ Synchronous Replication
 -----------------------
 
 $EDITOR master/postgresql.conf
-(add "replica1" to list of synchronous_standby_names, and turn on hot_standby_feedback)
+(add "replica1" to list of synchronous_standby_names
+$EDITOR replica1/postgresql.conf
+(turn on hot_standby_feedback)
 pg_ctl -D master reload
+pg_ctl -D replica1 reload
 ^b n
 runbench.sh
 ^b n
@@ -277,6 +279,7 @@ begin;
 insert into test values ('test3');
 commit;
 ^c
+select * from test;
 begin;
 set synchronous_commit='local';
 insert into test values ('test4');
@@ -381,10 +384,3 @@ Exit
 exit
 exit
 vagrant halt (or destroy)
-
-
-
-
-
-
-

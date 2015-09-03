@@ -2,13 +2,14 @@
 
 echo 'starting provisioning'
 
-cp -rp /import /setup
-chmod -R +rx /setup
+#cp -rp /import /setup
+#chmod -R +rx /setup
 
 # install wget
 
 apt-get update
 apt-get -y -q install wget
+apt-get -y -q install apt-utils
 
 # setup apt-get to pull from apt.postgresql.org
 
@@ -42,7 +43,7 @@ apt-get -y -q install rsync
 
 echo ''
 echo 'container loaded and ready for tutorial'
-echo 'version 0.5.1 of pgReplicationTutorial environment'
+echo 'version 0.7 of pgReplicationTutorial environment'
 echo 'now with 9.4 and docker support'
 
 exit 0

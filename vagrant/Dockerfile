@@ -4,7 +4,7 @@ RUN apt-key adv --keyserver pgp.mit.edu --recv-keys B97B0AFCAA1A47F044F244A07FCC
 
 ENV PG_MAJOR 9.4
 
-ENV PG_VERSION 9.4.0-1.pgdg70+1
+ENV PG_VERSION 9.4+169.pgdg14.04+1
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -13,9 +13,9 @@ RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* 
   
 ENV LANG en_US.utf8
 
-COPY setup /import
-  
-RUN /import/package_install.sh
+COPY setup /setup
+
+RUN /setup/package_install.sh
 
 RUN /setup/dbprep.sh
 

@@ -10,7 +10,8 @@ do the hands-on exercises which needs to happen _before_ the
 tutorial starts, so please read the below.
 
 **All steps through Vagrant Up / Docker Pull should be completed before
-getting to the tutorial**
+getting to the tutorial.  The tutorial will not include any help on getting these
+systems running.**
 
 Requirements
 =============
@@ -27,7 +28,7 @@ Software and Wetware:
 * terminal program capable of ssh
 * familiarity with the bash/linux command line
 * familiarity with one or more command-line text editors
-* vagrant and virtualbox (see below) OR Docker 1.4.0 or later
+* vagrant and virtualbox (see below) OR Docker 1.5.0 or later
 
 Vagrant vs. Docker
 ==================
@@ -37,112 +38,30 @@ is much easier to set up, and requires far less system resources to run
 when you're taking the tutorial.  However, using Docker does require:
 
 * A Linux laptop, with Linux kernel 3.8 or later
-* Package lxc-docker installed running version 1.4 or later
+* Package lxc-docker installed running version 1.5 or later
 
-While Docker can be run on Windows and Mac desktops using boot2docker and other
-mechnisms, we recommend that such users use the Vagrant version instead.
+OR:
 
-If you are using Docker, skip down to the Docker Installation below and
-proceed from there.
+* A windows or Mac laptop running the Docker Toolbox or Kitematic
 
-Installing the Base Software: Vagrant
-=====================================
+[Docker Toolbox](https://www.docker.com/toolbox) is available from Docker. 
+We are not able to provide detailed instructions or assistance on configuring
+Docker Toolbox on Windows or Mac.  The Toolbox page, however, has an excellent
+tutorial.
 
-First, you will need to install Vagrant and VirtualBox if you do not
-already have them.  If you do already have them, please make sure that
-you have at least these minimum versions:
-
-* Vagrant 1.4.1 or later
-* VirtualBox 4.2 or later
-
-Otherwise, you're going to need to install them.  Fortunately, both have
-downloads for most OSes and extensive documentation.  And when you get
-used to them, you'll find Vagrant an invaluable tool for testing.
-
-Vagrant Installation:
-
-* https://docs.vagrantup.com/v2/installation/
-* https://docs.vagrantup.com/v2/getting-started/
-
-VirtualBox Installation:
-
-* https://www.virtualbox.org/wiki/Downloads
-* https://www.virtualbox.org/wiki/End-user_documentation
-
-Installing the Virtual Machine Image: Vagrant
-=============================================
-
-Once you've installed Vagrant and VirtualBox, you'll need to get an
-operating system image, or "box".  Please download one of the following
-large files:
-
-If you have a 64-bit laptop: http://files.vagrantup.com/precise64.box
-
-If you have a 32-bit laptop: http://files.vagrantup.com/precise32.box
-
-Then run the following command from the folder where you downloaded it:
-
-* 64-bit: vagrant box add precise precise64.box
-* 32-bit: vagrant box add precise precise32.box
-
-Installing Tutorial Exercises: Vagrant
-======================================
-
-Install the tutorial exercises on your machine one of two
-ways:
-
-**Preferred Method**: Git Checkout from the Github repo. The
-repository is here: https://github.com/jberkus/pgReplicationTutorial,
-and you can clone it by:
-
-    git clone https://github.com/jberkus/pgReplicationTutorial.git
-
-**Alternate Method**: if you're not comfortable with git, download
-the tarball from:
-
-    https://dl.dropboxusercontent.com/u/5132935/pgReplicationTutorial.tgz
-
-This will require the programs "tar" and "gzip" to expand, as follows:
-
-    tar -p -xvf pgReplicationTutorial.tgz
-
-We apologize for not providing a "zip" formatted archive, but zip does not
-preserve file permissions, which would cause issues.
-
-The ReplicationTutorial directory should be placed somewhere
-you have disk space available.
-
-Vagrant Up
-==========
-
-The first time you do vagrant up, it will require an internet connection
-with significant bandwidth and around 1/2 hour.  As such, you should do
-it at home, before you get to the conference or the tutorial.
-
-Open your terminal program. Navigate to pgReplicationTutorial/vagrant
-directory. Type the following:
-
-    vagrant up
-
-This will launche the precise box (VM), install a bunch of software on
-it, and start it up.  You will see some brief errors during the startup, many of them in relation to not having a tty. 
-Only errors which involve more than 4 lines of errors in a row are significant; others can be ignored. 
-Verify that you can log into it with:
-
-    vagrant ssh
-
-Now log out with "exit".  Shut down the VM, but leave it set up in preparation
-for the tutorial:
-
-    vagrant suspend
+If you are unable to get Docker working, or are simply more comfortable 
+with Vagrant, then please see the Vagrant instructions in Vagrant.md.
     
 Docker Installation
 ===================
 
-The Docker image for this tutorial is 64-bit and was built with Docker 1.4.1.
-If you are on a 32-bit machine, or if you are limited to using Docker 1.3 or older,
+The Docker image for this tutorial is 64-bit and was built with Docker 1.7.1.
+If you are on a 32-bit machine, or if you are limited to using Docker 1.4 or older,
 I recommend that you scroll back up and follow the Vagrant install instructions
 instead.
+
+If you're working on Windows or OSX, you'll need to run commands using the 
+Docker Terminal which is a part of the Docker Toolbox.
 
 First pull the image:
 
@@ -178,6 +97,9 @@ These are copies of the slides for the tutorial.
 ChangeLog
 =========
 
+**0.6** Updated for Postgres Open 2015.  PostGIS removed to shrink image.  Docker instructions provided
+as primary recommended option.
+
 **0.5.1** multiple fixes to Docker image.
 
 **0.5** Added PostgreSQL 9.4 replication slots to the tutorial as exercise.  Added some additional tuning and configuration portions.
@@ -191,7 +113,7 @@ ChangeLog
 License
 =======
 
-The pgReplicationTutorial is Copyright 2013-2014 Josh Berkus
+The pgReplicationTutorial is Copyright 2013-2015 Josh Berkus
 and PostgreSQL Experts Inc.
 
 All slides, text, instructions and similar content in this tutorial are
