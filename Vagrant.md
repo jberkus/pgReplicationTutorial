@@ -2,7 +2,7 @@ Vagrant Instructions
 ====================
 
 These are installation instructions for participants who are, for whatever reason,
-unable to use Docker.
+unable to use Docker.  First, install the Tutorial Exercises from the main instructions.
 
 Alternative: Installing the Base Software: Vagrant
 ==================================================
@@ -44,39 +44,12 @@ Then run the following command from the folder where you downloaded it:
 * 64-bit: vagrant box add precise precise64.box
 * 32-bit: vagrant box add precise precise32.box
 
-Installing Tutorial Exercises: Vagrant
-======================================
-
-Install the tutorial exercises on your machine one of two
-ways:
-
-**Preferred Method**: Git Checkout from the Github repo. The
-repository is here: https://github.com/jberkus/pgReplicationTutorial,
-and you can clone it by:
-
-    git clone https://github.com/jberkus/pgReplicationTutorial.git
-
-**Alternate Method**: if you're not comfortable with git, download
-the tarball from:
-
-    https://dl.dropboxusercontent.com/u/5132935/pgReplicationTutorial.tgz
-
-This will require the programs "tar" and "gzip" to expand, as follows:
-
-    tar -p -xvf pgReplicationTutorial.tgz
-
-We apologize for not providing a "zip" formatted archive, but zip does not
-preserve file permissions, which would cause issues.
-
-The ReplicationTutorial directory should be placed somewhere
-you have disk space available.
-
 Vagrant Up
 ==========
 
 The first time you do vagrant up, it will require an internet connection
-with significant bandwidth and around 1/2 hour.  As such, you should do
-it at home, before you get to the conference or the tutorial.
+with significant bandwidth and around 1/2 hour.  As such, **you should do
+it at home, before you get to the conference or the tutorial.**
 
 Open your terminal program. Navigate to pgReplicationTutorial/vagrant
 directory. Type the following:

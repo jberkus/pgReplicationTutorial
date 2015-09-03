@@ -50,7 +50,36 @@ Docker Toolbox on Windows or Mac.  The Toolbox page, however, has an excellent
 tutorial.
 
 If you are unable to get Docker working, or are simply more comfortable 
-with Vagrant, then please see the Vagrant instructions in Vagrant.md.
+with Vagrant, then please see the Vagrant instructions in Vagrant.md after
+you have installed the tutorial exercises.
+
+Installing Tutorial Exercises
+=============================
+
+Install the tutorial exercises on your machine one of two
+ways below.  Installing them is required if you are using 
+Vagrant, and is optional if you are using Docker, but helpful.
+
+**Preferred Method**: Git Checkout from the Github repo. The
+repository is here: https://github.com/jberkus/pgReplicationTutorial,
+and you can clone it by:
+
+    git clone https://github.com/jberkus/pgReplicationTutorial.git
+
+**Alternate Method**: if you're not comfortable with git, download
+the tarball from:
+
+    https://dl.dropboxusercontent.com/u/5132935/pgReplicationTutorial.tgz
+
+This will require the programs "tar" and "gzip" to expand, as follows:
+
+    tar -p -xvf pgReplicationTutorial.tgz
+
+We apologize for not providing a "zip" formatted archive, but zip does not
+preserve file permissions, which would cause issues.
+
+The ReplicationTutorial directory should be placed somewhere
+you have disk space available.
     
 Docker Installation
 ===================
@@ -73,7 +102,6 @@ While a pull is sufficient, I suggest that you test the image by doing:
     
 This should log you into a command prompt as root.  If you type "exit" the container
 will halt and erase itself.
-    
 
 Other Files In This Package
 ===========================
